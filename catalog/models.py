@@ -1,15 +1,16 @@
 from django.db import models
 
 # Create your models here.
+# Changed genre to forme ans Genre to Fomre
 
 from django.urls import reverse  # To generate URLS by reversing URL patterns
 
 
-class Genre(models.Model):
+class Forme(models.Model):
     """Model representing a book genre (e.g. Science Fiction, Non Fiction)."""
     name = models.CharField(
         max_length=200,
-        help_text="Enter a book genre (e.g. Science Fiction, French Poetry etc.)"
+        help_text="Enterer une forme de produit (exemple: Liquide ...)"
         )
 
     def __str__(self):
@@ -37,16 +38,16 @@ class Book(models.Model):
     isbn = models.CharField('ISBN', max_length=13,
                             help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn'
                                       '">ISBN number</a>')
-    genre = models.ManyToManyField(Genre, help_text="Select a genre for this book")
+    forme = models.ManyToManyField(Forme, help_text="Selectionner une forme pour ce produit.")
     # ManyToManyField used because a genre can contain many books and a Book can cover many genres.
     # Genre class has already been defined so we can specify the object above.
     language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
 
-    def display_genre(self):
+    def display_forme(self):
         """Creates a string for the Genre. This is required to display genre in Admin."""
-        return ', '.join([genre.name for genre in self.genre.all()[:3]])
+        return ', '.join([forme.name for forme in self.forme.all()[:3]])
 
-    display_genre.short_description = 'Genre'
+    display_forme.short_description = 'Forme'
 
     def get_absolute_url(self):
         """Returns the url to access a particular book instance."""

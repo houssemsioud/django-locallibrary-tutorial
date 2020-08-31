@@ -2,17 +2,17 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Author, Genre, Book, BookInstance, Language
-
+from .models import Author, Forme, Book, BookInstance, Language
+# Changed genre to forme ans Genre to Fomre
 """Minimal registration of Models.
 admin.site.register(Book)
 admin.site.register(Author)
 admin.site.register(BookInstance)
-admin.site.register(Genre)
+admin.site.register(Forme)
 admin.site.register(Language)
 """
 
-admin.site.register(Genre)
+admin.site.register(Forme)
 admin.site.register(Language)
 
 
@@ -47,7 +47,7 @@ class BookAdmin(admin.ModelAdmin):
      - fields to be displayed in list view (list_display)
      - adds inline addition of book instances in book view (inlines)
     """
-    list_display = ('title', 'author', 'display_genre')
+    list_display = ('title', 'author', 'display_forme')
     inlines = [BooksInstanceInline]
 
 
