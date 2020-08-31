@@ -10,13 +10,24 @@ class Forme(models.Model):
     """Model representing a book genre (e.g. Science Fiction, Non Fiction)."""
     name = models.CharField(
         max_length=200,
-        help_text="Enterer une forme de produit (exemple: Liquide ...)"
+        help_text="Entrer une forme de produit (exemple: Liquide ...)"
         )
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
         return self.name
 
+
+class Catégorie(models.Model):
+    """Model representing a book genre (e.g. Science Fiction, Non Fiction)."""
+    name = models.CharField(
+        max_length=200,
+        help_text="Entrer une catégorie de produit (exemple: Un ...)"
+        )
+
+    def __str__(self):
+        """String for representing the Model object (in Admin site etc.)"""
+        return self.name
 
 class Language(models.Model):
     """Model representing a Language (e.g. English, French, Japanese, etc.)"""
@@ -41,6 +52,9 @@ class Book(models.Model):
     forme = models.ManyToManyField(Forme, help_text="Selectionner une forme pour ce produit.")
     # ManyToManyField used because a genre can contain many books and a Book can cover many genres.
     # Genre class has already been defined so we can specify the object above.
+    catégorie = models.ManyToManyField(Catégorie, help_text="Selectionner une catégorie pour ce produit.")
+    # ManyToManyField used because a genre can contain many books and a Book can cover many genres.
+    # catégorie class has already been defined so we can specify the object above.
     language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
 
     def display_forme(self):
@@ -48,6 +62,12 @@ class Book(models.Model):
         return ', '.join([forme.name for forme in self.forme.all()[:3]])
 
     display_forme.short_description = 'Forme'
+
+    def display_catégorie(self):
+        """Creates a string for the Genre. This is required to display genre in Admin."""
+        return ', '.join([catégorie.name for catégorie in self.catégorie.all()[:3]])
+
+    display_catégorie.short_description = 'Catégorie'
 
     def get_absolute_url(self):
         """Returns the url to access a particular book instance."""

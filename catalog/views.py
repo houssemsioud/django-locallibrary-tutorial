@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 # Changed genre to forme ans Genre to Fomre
 
-from .models import Book, Author, BookInstance, Forme
+from .models import Book, Author, BookInstance, Forme, Catégorie
 
 
 def index(request):

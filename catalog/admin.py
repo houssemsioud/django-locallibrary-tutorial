@@ -2,17 +2,19 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Author, Forme, Book, BookInstance, Language
+from .models import Author, Forme, Book, BookInstance, Language, Catégorie
 # Changed genre to forme ans Genre to Fomre
 """Minimal registration of Models.
 admin.site.register(Book)
 admin.site.register(Author)
 admin.site.register(BookInstance)
 admin.site.register(Forme)
+admin.site.register(Catégorie)
 admin.site.register(Language)
 """
 
 admin.site.register(Forme)
+admin.site.register(Catégorie)
 admin.site.register(Language)
 
 
