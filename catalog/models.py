@@ -17,26 +17,49 @@ class Forme(models.Model):
         """String for representing the Model object (in Admin site etc.)"""
         return self.name
 
-
-class Catégorie(models.Model):
+class Presentation(models.Model):
     """Model representing a book genre (e.g. Science Fiction, Non Fiction)."""
     name = models.CharField(
         max_length=200,
-        help_text="Entrer une catégorie de produit (exemple: Un ...)"
+        help_text="Entrer la présentation de produit (exemple: Bte de 12 ...)"
         )
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
         return self.name
 
-class Language(models.Model):
-    """Model representing a Language (e.g. English, French, Japanese, etc.)"""
-    name = models.CharField(max_length=200,
-                            help_text="Enter the book's natural language (e.g. English, French, Japanese etc.)")
+class Type_composant(models.Model):  
+    """Model representing an author."""
+    name = models.CharField(max_length=100)
 
     def __str__(self):
-        """String for representing the Model object (in Admin site etc.)"""
+        """String for representing the Model object."""
         return self.name
+
+class Composant(models.Model):  
+    """Model representing an author."""
+    code_composant = models.CharField(max_length=100)
+    designation_composant = models.CharField(max_length=100)
+    principe_actif=BooleanField()
+    dosage_maximum = models.DecimalField(max_digits=19, decimal_places=10)
+    dosage_minimum = models.DecimalField(max_digits=19, decimal_places=10)
+    type_composant = models.ForeignKey('Type du composant', on_delete=models.SET_NULL, null=True)
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.code_composant
+
+class Parametre(models.Model):  
+    """Model representing an author."""
+    code_composant = models.CharField(max_length=100)
+    designation_composant = models.CharField(max_length=100)
+    type_composant = models.CharField(max_length=100)
+    principe_actif=BooleanField()
+    Dosage_maximum = models.DecimalField(max_digits=19, decimal_places=10)
+    Dosage_minimum = models.DecimalField(max_digits=19, decimal_places=10)
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.code_composant
 
 
 class Book(models.Model):
